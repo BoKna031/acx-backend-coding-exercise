@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="4" author="bozidar">
+        <insert tableName="rental">
+            <column name="vehicle" value="3"/>
+            <column name="customer" value="3"/>
+            <column name="start_date_time" valueDate="2023-09-02T12:00:00"/>
+            <column name="return_date_time" valueDate="2023-09-02T12:00:00"/>
+            <column name="status" value="out"/>
+        </insert>
+        <insert tableName="rental">
+            <column name="vehicle" value="4"/>
+            <column name="customer" value="4"/>
+            <column name="start_date_time" valueDate="2023-10-11T14:00:00"/>
+            <column name="return_date_time" valueDate="2023-10-13T12:00:00"/>
+            <column name="status" value="pending"/>
+        </insert>
+        <insert tableName="rental">
+            <column name="vehicle" value="3"/>
+            <column name="customer" value="5"/>
+            <column name="start_date_time" valueDate="2023-10-01T09:00:00"/>
+            <column name="return_date_time" valueDate="2023-10-07T17:00:00"/>
+            <column name="status" value="returned damaged"/>
+        </insert>
+        <insert tableName="rental">
+            <column name="vehicle" value="2"/>
+            <column name="customer" value="6"/>
+            <column name="start_date_time" valueDate="2023-10-07T11:00:00"/>
+            <column name="return_date_time" valueDate="2023-10-09T19:00:00"/>
+            <column name="status" value="returned ok"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

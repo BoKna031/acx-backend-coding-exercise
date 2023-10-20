@@ -7,4 +7,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
     <include file="changelogs/init.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/data/01-insert-data-customer.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/data/02-insert-data-vehicle.xml" relativeToChangelogFile="true"/>
+    <include file="changelogs/data/03-insert-data-rental.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

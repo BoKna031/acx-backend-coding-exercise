@@ -5,11 +5,66 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-    <changeSet id="1" author="someone">
-        <createTable tableName="some_table">
-            <column name="pk" type="varchar(48)">
-                <constraints primaryKey="true" primaryKeyName="some_table_pk_name" />
+    <changeSet id="1" author="bozidar">
+        <createTable tableName="customer">
+            <column name="id" type="long" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" unique="true" />
+            </column>
+            <column name="first_name" type="VARCHAR(255)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="last_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birth_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="driver_license_number" type="VARCHAR(50)">
+                <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
+
+        <createTable tableName="vehicle">
+            <column name="id" type="long" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" unique="true" />
+            </column>
+            <column name="brand" type="VARCHAR(255)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="model" type="VARCHAR(255)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="year" type="int" >
+                <constraints nullable="false" />
+            </column>
+            <column name="colour" type="VARCHAR(255)" />
+            <column name="registration" type="VARCHAR(255)" />
+        </createTable>
+
+        <createTable tableName="rental">
+            <column name="id" type="long" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" unique="true" />
+            </column>
+            <column name="customer" type="long">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vehicle" type="long">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date_time" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="return_date_time" type="DATETIME" />
+            <column name="status" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="rental" baseColumnNames="customer"
+                                 constraintName="customer_fk"
+                                 referencedTableName="customer" referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="rental" baseColumnNames="vehicle"
+                                 constraintName="vehicle_fk"
+                                 referencedTableName="vehicle" referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>

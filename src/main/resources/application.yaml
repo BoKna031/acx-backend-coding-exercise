@@ -1,4 +1,11 @@
 spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
   liquibase:
     enabled: true
     changelog: db/changelog/liquibase-changelog.xml
+
