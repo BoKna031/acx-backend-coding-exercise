@@ -24,6 +24,7 @@ public class Vehicle {
     @NotNull @NotEmpty
     private String model;
     @NotNull
+    @Column(name = "manufacture_year")
     private int year;
     private String colour;
     private String registration;
