@@ -29,6 +29,6 @@ public class Customer {
     private String lastName;
     @NotNull
     private LocalDate birthDate;
-    @NotNull @NotEmpty @UniqueElements
+    @NotNull @NotEmpty
     private String driverLicenseNumber;
 }
