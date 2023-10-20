@@ -10,70 +10,70 @@
         <insert tableName="vehicle">
             <column name="brand" value="Toyota"/>
             <column name="model" value="Camry"/>
-            <column name="year" value="2022"/>
+            <column name="manufacture_year" value="2022"/>
             <column name="colour" value="Silver"/>
             <column name="registration" value="ABC123"/>
         </insert>
         <insert tableName="vehicle">
             <column name="brand" value="Honda"/>
             <column name="model" value="Civic"/>
-            <column name="year" value="2021"/>
+            <column name="manufacture_year" value="2021"/>
             <column name="colour" value="Blue"/>
             <column name="registration" value="XYZ456"/>
         </insert>
         <insert tableName="vehicle">
             <column name="brand" value="Ford"/>
             <column name="model" value="Escape"/>
-            <column name="year" value="2020"/>
+            <column name="manufacture_year" value="2020"/>
             <column name="colour" value="Red"/>
             <column name="registration" value="DEF789"/>
         </insert>
         <insert tableName="vehicle">
             <column name="brand" value="Chevrolet"/>
             <column name="model" value="Malibu"/>
-            <column name="year" value="2023"/>
+            <column name="manufacture_year" value="2023"/>
             <column name="colour" value="Black"/>
             <column name="registration" value="GHI101"/>
         </insert>
         <insert tableName="vehicle">
             <column name="brand" value="Nissan"/>
             <column name="model" value="Altima"/>
-            <column name="year" value="2019"/>
+            <column name="manufacture_year" value="2019"/>
             <column name="colour" value="White"/>
             <column name="registration" value="JKL202"/>
         </insert>
         <insert tableName="vehicle">
             <column name="brand" value="Kia"/>
             <column name="model" value="Sportage"/>
-            <column name="year" value="2022"/>
+            <column name="manufacture_year" value="2022"/>
             <column name="colour" value="Green"/>
             <column name="registration" value="MNO303"/>
         </insert>
         <insert tableName="vehicle">
             <column name="brand" value="Hyundai"/>
             <column name="model" value="Sonata"/>
-            <column name="year" value="2021"/>
+            <column name="manufacture_year" value="2021"/>
             <column name="colour" value="Blue"/>
             <column name="registration" value="PQR404"/>
         </insert>
         <insert tableName="vehicle">
             <column name="brand" value="Volkswagen"/>
             <column name="model" value="Passat"/>
-            <column name="year" value="2020"/>
+            <column name="manufacture_year" value="2020"/>
             <column name="colour" value="Gray"/>
             <column name="registration" value="STU505"/>
         </insert>
         <insert tableName="vehicle">
             <column name="brand" value="Mazda"/>
             <column name="model" value="CX-5"/>
-            <column name="year" value="2023"/>
+            <column name="manufacture_year" value="2023"/>
             <column name="colour" value="Black"/>
             <column name="registration" value="VWX606"/>
         </insert>
         <insert tableName="vehicle">
             <column name="brand" value="Subaru"/>
             <column name="model" value="Outback"/>
-            <column name="year" value="2022"/>
+            <column name="manufacture_year" value="2022"/>
             <column name="colour" value="Silver"/>
             <column name="registration" value="YZA707"/>
         </insert>

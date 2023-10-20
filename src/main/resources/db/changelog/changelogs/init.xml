@@ -34,7 +34,7 @@
             <column name="model" type="VARCHAR(255)" >
                 <constraints nullable="false" />
             </column>
-            <column name="year" type="int" >
+            <column name="manufacture_year" type="int" >
                 <constraints nullable="false" />
             </column>
             <column name="colour" type="VARCHAR(255)" />
