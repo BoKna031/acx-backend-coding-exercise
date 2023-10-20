@@ -11,9 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -24,7 +21,7 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<CustomerResponse> create(@RequestBody @Valid CustomerRequest costumer){
-        return new ResponseEntity<>(customerService.createCustomer(costumer), HttpStatus.CREATED);
+        return new ResponseEntity<>(customerService.create(costumer), HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -33,8 +30,8 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerResponse> getById(@PathVariable int id){
-        CustomerResponse customerResponse = customerService.getCustomer(id);
+    public ResponseEntity<CustomerResponse> getById(@PathVariable long id){
+        CustomerResponse customerResponse = customerService.getById(id);
         if(customerResponse == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer with id: " + id + " not found");
         return ResponseEntity.ok(customerResponse);

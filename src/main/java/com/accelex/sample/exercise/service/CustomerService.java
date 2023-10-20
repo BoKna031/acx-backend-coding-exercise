@@ -13,15 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
-
-import static com.accelex.sample.exercise.mapper.CustomerMapper.mapToCustomerResponse;
-
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
     private final CustomerRepository customerRepository;
 
-    public CustomerResponse createCustomer(CustomerRequest customerRequest){
+    public CustomerResponse create(CustomerRequest customerRequest){
         Customer customer = CustomerMapper.mapToCustomer(customerRequest);
         if(customerRepository.existsByDriverLicenseNumber(customerRequest.getDriverLicenseNumber()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Customer with entered driving license number already exists");
@@ -34,7 +31,7 @@ public class CustomerService {
         return customers.map(CustomerMapper::mapToCustomerResponse);
     }
 
-    public CustomerResponse getCustomer(int id) {
+    public CustomerResponse getById(long id) {
         Optional<Customer> customer = customerRepository.findById(id);
         return customer.map(CustomerMapper::mapToCustomerResponse).orElse(null);
     }
