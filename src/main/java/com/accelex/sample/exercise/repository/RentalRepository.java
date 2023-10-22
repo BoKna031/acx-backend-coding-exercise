@@ -4,6 +4,8 @@ import com.accelex.sample.exercise.model.Customer;
 import com.accelex.sample.exercise.model.Rental;
 import com.accelex.sample.exercise.model.Vehicle;
 import com.accelex.sample.exercise.model.enums.RentalStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -31,4 +33,7 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
             @Param("vehicle") Vehicle vehicle,
             @Param("status") RentalStatus status
     );
+
+    @Query("SELECT r.vehicle FROM Rental r WHERE r.returnDate IS NULL AND r.status = :status")
+    Page<Vehicle> findAllRentedVehicles(@Param("status") RentalStatus status, Pageable pageable);
 }

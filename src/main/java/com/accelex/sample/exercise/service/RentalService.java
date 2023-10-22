@@ -3,9 +3,11 @@ package com.accelex.sample.exercise.service;
 import com.accelex.sample.exercise.dto.rental.RentalRequest;
 import com.accelex.sample.exercise.dto.rental.RentalResponse;
 import com.accelex.sample.exercise.dto.rental.ReturnVehicleRequest;
+import com.accelex.sample.exercise.dto.vehicle.VehicleResponse;
 import com.accelex.sample.exercise.exception.ElementNotFoundException;
 import com.accelex.sample.exercise.exception.RentalNotPossibleException;
 import com.accelex.sample.exercise.mapper.RentalMapper;
+import com.accelex.sample.exercise.mapper.VehicleMapper;
 import com.accelex.sample.exercise.model.Customer;
 import com.accelex.sample.exercise.model.Rental;
 import com.accelex.sample.exercise.model.Vehicle;
@@ -14,6 +16,8 @@ import com.accelex.sample.exercise.repository.CustomerRepository;
 import com.accelex.sample.exercise.repository.RentalRepository;
 import com.accelex.sample.exercise.repository.VehicleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -54,6 +58,11 @@ public class RentalService {
 
         Rental savedRental = rentalRepository.save(rental);
         return RentalMapper.mapToRentalResponse(savedRental);
+    }
+
+    public Page<VehicleResponse> getAllRented(Pageable pageable){
+        Page<Vehicle> vehicles = rentalRepository.findAllRentedVehicles(RentalStatus.OUT, pageable);
+        return vehicles.map(VehicleMapper::mapToVehicleResponse);
     }
 
     private Rental prepareRental(RentalRequest request){
