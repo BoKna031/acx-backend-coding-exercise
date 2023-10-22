@@ -1,7 +1,7 @@
 package com.accelex.sample.exercise.mapper;
 
-import com.accelex.sample.exercise.dto.CustomerRequest;
-import com.accelex.sample.exercise.dto.CustomerResponse;
+import com.accelex.sample.exercise.dto.customer.CustomerRequest;
+import com.accelex.sample.exercise.dto.customer.CustomerResponse;
 import com.accelex.sample.exercise.model.Customer;
 
 public class CustomerMapper {

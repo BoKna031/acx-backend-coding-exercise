@@ -1,4 +1,4 @@
-package com.accelex.sample.exercise.dto;
+package com.accelex.sample.exercise.dto.customer;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

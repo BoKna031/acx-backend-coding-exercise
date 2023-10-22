@@ -1,6 +1,6 @@
 package com.accelex.sample.exercise.dto.rental;
 
-import com.accelex.sample.exercise.dto.CustomerResponse;
+import com.accelex.sample.exercise.dto.customer.CustomerResponse;
 import com.accelex.sample.exercise.dto.vehicle.VehicleResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;

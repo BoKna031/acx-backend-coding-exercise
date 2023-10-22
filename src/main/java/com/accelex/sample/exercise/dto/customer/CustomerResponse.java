@@ -1,4 +1,4 @@
-package com.accelex.sample.exercise.dto;
+package com.accelex.sample.exercise.dto.customer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

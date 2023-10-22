@@ -1,7 +1,7 @@
 package com.accelex.sample.exercise.controller;
 
-import com.accelex.sample.exercise.dto.CustomerRequest;
-import com.accelex.sample.exercise.dto.CustomerResponse;
+import com.accelex.sample.exercise.dto.customer.CustomerRequest;
+import com.accelex.sample.exercise.dto.customer.CustomerResponse;
 import com.accelex.sample.exercise.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/customers")

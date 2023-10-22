@@ -1,7 +1,7 @@
 package com.accelex.sample.exercise.service;
 
-import com.accelex.sample.exercise.dto.CustomerRequest;
-import com.accelex.sample.exercise.dto.CustomerResponse;
+import com.accelex.sample.exercise.dto.customer.CustomerRequest;
+import com.accelex.sample.exercise.dto.customer.CustomerResponse;
 import com.accelex.sample.exercise.exception.CustomerConflictException;
 import com.accelex.sample.exercise.exception.ElementNotFoundException;
 import com.accelex.sample.exercise.mapper.CustomerMapper;
@@ -10,11 +10,8 @@ import com.accelex.sample.exercise.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
