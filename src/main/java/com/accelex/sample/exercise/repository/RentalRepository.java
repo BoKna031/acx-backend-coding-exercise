@@ -1,5 +1,6 @@
 package com.accelex.sample.exercise.repository;
 
+import com.accelex.sample.exercise.model.Customer;
 import com.accelex.sample.exercise.model.Rental;
 import com.accelex.sample.exercise.model.Vehicle;
 import com.accelex.sample.exercise.model.enums.RentalStatus;
@@ -9,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface RentalRepository extends JpaRepository<Rental, Long> {
 
@@ -22,4 +24,11 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
     @Query("SELECT COUNT(r) FROM Rental r WHERE r.vehicle = :vehicle AND r.status = :status")
     int existVehicleWithStatus(
             @Param("vehicle") Vehicle vehicle, @Param("status") RentalStatus status);
+
+    @Query("SELECT r FROM Rental r WHERE r.vehicle = :vehicle AND r.customer = :customer AND r.returnDate IS NULL AND r.status = :status")
+    Optional<Rental> findRentedVehicleForCustomer(
+            @Param("customer") Customer customer,
+            @Param("vehicle") Vehicle vehicle,
+            @Param("status") RentalStatus status
+    );
 }

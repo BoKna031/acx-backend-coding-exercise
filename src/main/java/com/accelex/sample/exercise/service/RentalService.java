@@ -1,8 +1,11 @@
 package com.accelex.sample.exercise.service;
 
 import com.accelex.sample.exercise.dto.rental.RentalRequest;
+import com.accelex.sample.exercise.dto.rental.RentalResponse;
+import com.accelex.sample.exercise.dto.rental.ReturnVehicleRequest;
 import com.accelex.sample.exercise.exception.ElementNotFoundException;
 import com.accelex.sample.exercise.exception.RentalNotPossibleException;
+import com.accelex.sample.exercise.mapper.RentalMapper;
 import com.accelex.sample.exercise.model.Customer;
 import com.accelex.sample.exercise.model.Rental;
 import com.accelex.sample.exercise.model.Vehicle;
@@ -26,7 +29,7 @@ public class RentalService {
 
     private final VehicleRepository vehicleRepository;
 
-    public void rentVehicle(RentalRequest request) throws RentalNotPossibleException {
+    public RentalResponse rentVehicle(RentalRequest request) throws RentalNotPossibleException {
         Rental rental = prepareRental(request);
 
         if(!isVehicleDriveable(rental.getVehicle()))
@@ -35,18 +38,46 @@ public class RentalService {
         if(!isVehicleAvailableAtTimestamp(rental.getVehicle(), rental.getStartDate()))
             throw new RentalNotPossibleException("Vehicle is not available!");
 
-        rentalRepository.save(rental);
+        Rental savedRental = rentalRepository.save(rental);
+        return RentalMapper.mapToRentalResponse(savedRental);
+    }
+
+    public RentalResponse returnVehicle(ReturnVehicleRequest request){
+        Customer customer = getCustomerOrThrowNotFoundException(request.getCustomerId());
+        Vehicle vehicle = getVehicleOrThrowNotFoundException(request.getVehicleId());
+
+        Rental rental = findRentedVehicleOrThrowNotFoundException(customer, vehicle);
+
+        rental.setReturnDate(LocalDateTime.now());
+        RentalStatus status = request.isVehicleReturnedDamaged()? RentalStatus.RETURNED_DAMAGED : RentalStatus.RETURNED_OK;
+        rental.setStatus(status);
+
+        Rental savedRental = rentalRepository.save(rental);
+        return RentalMapper.mapToRentalResponse(savedRental);
     }
 
     private Rental prepareRental(RentalRequest request){
-        Customer customer = customerRepository.findById(request.getCustomerId())
-                .orElseThrow(() -> new ElementNotFoundException("Customer", request.getCustomerId().toString()));
-        Vehicle vehicle = vehicleRepository.findById(request.getVehicleId())
-                .orElseThrow(() -> new ElementNotFoundException("Vehicle", request.getVehicleId().toString()));
+        Customer customer = getCustomerOrThrowNotFoundException(request.getCustomerId());
+        Vehicle vehicle = getVehicleOrThrowNotFoundException(request.getVehicleId());
         RentalStatus status = (request.getPendingDateTime() == null)? RentalStatus.OUT: RentalStatus.PENDING;
         LocalDateTime startDateTime = (request.getPendingDateTime() == null)? LocalDateTime.now(): request.getPendingDateTime();
 
         return new Rental(customer, vehicle,startDateTime, null, status);
+    }
+
+    private Rental findRentedVehicleOrThrowNotFoundException(Customer customer, Vehicle vehicle){
+        return  rentalRepository.findRentedVehicleForCustomer(customer, vehicle, RentalStatus.OUT)
+                .orElseThrow(() -> new ElementNotFoundException("Rental doesn't exist or vehicle is already returned"));
+    }
+
+    private Vehicle getVehicleOrThrowNotFoundException(Long vehicleId) {
+        return  vehicleRepository.findById(vehicleId)
+                .orElseThrow(() -> new ElementNotFoundException("Vehicle", vehicleId.toString()));
+    }
+
+    private Customer getCustomerOrThrowNotFoundException(Long customerId) {
+        return customerRepository.findById(customerId)
+                .orElseThrow(() -> new ElementNotFoundException("Customer", customerId.toString()));
     }
 
     private boolean isVehicleAvailableAtTimestamp(Vehicle vehicle, LocalDateTime timestamp){
