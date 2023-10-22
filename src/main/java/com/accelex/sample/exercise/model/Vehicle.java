@@ -18,7 +18,7 @@ public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @NotNull @NotEmpty
     private String brand;
     @NotNull @NotEmpty
@@ -28,4 +28,12 @@ public class Vehicle {
     private int year;
     private String colour;
     private String registration;
+
+    public Vehicle(@NotNull String brand, @NotNull String model, @NotNull int year, String colour, String registration) {
+        this.brand = brand;
+        this.model = model;
+        this.year = year;
+        this.colour = colour;
+        this.registration = registration;
+    }
 }

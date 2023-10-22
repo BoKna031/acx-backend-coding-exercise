@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import java.time.LocalDate;
 
@@ -18,10 +17,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull @NotEmpty
     private String firstName;
@@ -31,4 +29,11 @@ public class Customer {
     private LocalDate birthDate;
     @NotNull @NotEmpty
     private String driverLicenseNumber;
+
+    public Customer(@NotNull String firstName, @NotNull String lastName, @NotNull LocalDate birthDate, @NotNull String driverLicenseNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.driverLicenseNumber = driverLicenseNumber;
+    }
 }

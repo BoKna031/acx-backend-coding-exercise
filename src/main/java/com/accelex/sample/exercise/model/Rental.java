@@ -19,17 +19,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Rental {
-    public Rental(Customer customer, Vehicle vehicle, @NotNull LocalDateTime startDate, LocalDateTime returnDate, @NotNull RentalStatus status) {
-        this.customer = customer;
-        this.vehicle = vehicle;
-        this.startDate = startDate;
-        this.returnDate = returnDate;
-        this.status = status;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne
     private Customer customer;
@@ -47,4 +40,12 @@ public class Rental {
     @NotNull
     @Enumerated(EnumType.ORDINAL)
     private RentalStatus status;
+
+    public Rental(Customer customer, Vehicle vehicle, @NotNull LocalDateTime startDate, LocalDateTime returnDate, @NotNull RentalStatus status) {
+        this.customer = customer;
+        this.vehicle = vehicle;
+        this.startDate = startDate;
+        this.returnDate = returnDate;
+        this.status = status;
+    }
 }
