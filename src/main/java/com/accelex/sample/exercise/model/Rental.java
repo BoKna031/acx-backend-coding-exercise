@@ -19,6 +19,13 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Rental {
+    public Rental(Customer customer, Vehicle vehicle, @NotNull LocalDateTime startDate, LocalDateTime returnDate, @NotNull RentalStatus status) {
+        this.customer = customer;
+        this.vehicle = vehicle;
+        this.startDate = startDate;
+        this.returnDate = returnDate;
+        this.status = status;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,11 +38,13 @@ public class Rental {
     private Vehicle vehicle;
 
     @NotNull
+    @Column(name = "start_date_time")
     private LocalDateTime startDate;
 
+    @Column(name = "return_date_time")
     private LocalDateTime returnDate;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private RentalStatus status;
 }

@@ -45,25 +45,25 @@
             <column name="id" type="long" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" unique="true" />
             </column>
-            <column name="customer" type="long">
+            <column name="customer_id" type="long">
                 <constraints nullable="false"/>
             </column>
-            <column name="vehicle" type="long">
+            <column name="vehicle_id" type="long">
                 <constraints nullable="false"/>
             </column>
             <column name="start_date_time" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
             <column name="return_date_time" type="DATETIME" />
-            <column name="status" type="VARCHAR(50)">
+            <column name="status" type="int">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
-        <addForeignKeyConstraint baseTableName="rental" baseColumnNames="customer"
+        <addForeignKeyConstraint baseTableName="rental" baseColumnNames="customer_id"
                                  constraintName="customer_fk"
                                  referencedTableName="customer" referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="rental" baseColumnNames="vehicle"
+        <addForeignKeyConstraint baseTableName="rental" baseColumnNames="vehicle_id"
                                  constraintName="vehicle_fk"
                                  referencedTableName="vehicle" referencedColumnNames="id"/>
     </changeSet>
