@@ -2,6 +2,8 @@ package com.accelex.sample.exercise.service;
 
 import com.accelex.sample.exercise.dto.CustomerRequest;
 import com.accelex.sample.exercise.dto.CustomerResponse;
+import com.accelex.sample.exercise.exception.CustomerConflictException;
+import com.accelex.sample.exercise.exception.ElementNotFoundException;
 import com.accelex.sample.exercise.mapper.CustomerMapper;
 import com.accelex.sample.exercise.model.Customer;
 import com.accelex.sample.exercise.repository.CustomerRepository;
@@ -21,7 +23,7 @@ public class CustomerService {
     public CustomerResponse create(CustomerRequest customerRequest){
         Customer customer = CustomerMapper.mapToCustomer(customerRequest);
         if(customerRepository.existsByDriverLicenseNumber(customerRequest.getDriverLicenseNumber()))
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Customer with entered driving license number already exists");
+            throw new CustomerConflictException("Customer with entered driving license number already exists");
         Customer savedCustomer =  customerRepository.save(customer);
         return CustomerMapper.mapToCustomerResponse(savedCustomer);
     }
@@ -32,7 +34,8 @@ public class CustomerService {
     }
 
     public CustomerResponse getById(long id) {
-        Optional<Customer> customer = customerRepository.findById(id);
-        return customer.map(CustomerMapper::mapToCustomerResponse).orElse(null);
+        Customer customer = customerRepository.findById(id).
+                orElseThrow(() -> new ElementNotFoundException("Customer", String.valueOf(id)));
+        return CustomerMapper.mapToCustomerResponse(customer);
     }
 }
