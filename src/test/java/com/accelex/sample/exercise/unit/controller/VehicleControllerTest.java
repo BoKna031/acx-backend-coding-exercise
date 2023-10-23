@@ -3,6 +3,7 @@ package com.accelex.sample.exercise.unit.controller;
 import com.accelex.sample.exercise.controller.VehicleController;
 import com.accelex.sample.exercise.dto.vehicle.VehicleResponse;
 import com.accelex.sample.exercise.service.VehicleService;
+import com.accelex.sample.exercise.service.interfaces.IVehicleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +26,7 @@ public class VehicleControllerTest {
     private VehicleController vehicleController;
 
     @Mock
-    private VehicleService vehicleServiceMock;
+    private IVehicleService vehicleServiceMock;
 
     @BeforeEach
     public void SetUp(){

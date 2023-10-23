@@ -4,7 +4,7 @@ import com.accelex.sample.exercise.dto.rental.RentalRequest;
 import com.accelex.sample.exercise.dto.rental.RentalResponse;
 import com.accelex.sample.exercise.dto.rental.ReturnVehicleRequest;
 import com.accelex.sample.exercise.dto.vehicle.VehicleResponse;
-import com.accelex.sample.exercise.service.RentalService;
+import com.accelex.sample.exercise.service.interfaces.IRentalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class RentalController {
 
-    private final RentalService rentalService;
+    private final IRentalService rentalService;
     @PostMapping
     public ResponseEntity<RentalResponse> rent(@RequestBody RentalRequest request) {
         return new ResponseEntity<>(rentalService.rentVehicle(request), HttpStatus.CREATED);

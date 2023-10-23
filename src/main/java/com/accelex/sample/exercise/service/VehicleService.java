@@ -4,17 +4,15 @@ import com.accelex.sample.exercise.dto.vehicle.VehicleRequest;
 import com.accelex.sample.exercise.dto.vehicle.VehicleResponse;
 import com.accelex.sample.exercise.exception.EntityConflictException;
 import com.accelex.sample.exercise.mapper.VehicleMapper;
-import com.accelex.sample.exercise.model.Rental;
 import com.accelex.sample.exercise.model.Vehicle;
 import com.accelex.sample.exercise.repository.VehicleRepository;
+import com.accelex.sample.exercise.service.interfaces.IVehicleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
 @RequiredArgsConstructor
-public class VehicleService {
+public class VehicleService implements IVehicleService {
 
     private final VehicleRepository vehicleRepository;
 

@@ -16,7 +16,7 @@ public class RestExceptionHandler {
     public ResponseEntity<ErrorDetail> handleElementNotFoundException(ElementNotFoundException enf){
         return new ResponseEntity<>(
                 ErrorDetail.builder()
-                        .title("Entity does not exist")
+                        .title("Element does not exist")
                         .status(HttpStatus.NOT_FOUND.value())
                         .message(enf.getMessage())
                         .build(), HttpStatus.NOT_FOUND);
@@ -35,7 +35,7 @@ public class RestExceptionHandler {
     public ResponseEntity<ErrorDetail> handleEntityConflictException(EntityConflictException cce){
         return new ResponseEntity<>(
                 ErrorDetail.builder()
-                        .title("Customer can't be created")
+                        .title("Entity can't be created")
                         .status(HttpStatus.CONFLICT.value())
                         .message(cce.getMessage())
                         .build(), HttpStatus.CONFLICT);

@@ -2,7 +2,7 @@ package com.accelex.sample.exercise.controller;
 
 import com.accelex.sample.exercise.dto.customer.CustomerRequest;
 import com.accelex.sample.exercise.dto.customer.CustomerResponse;
-import com.accelex.sample.exercise.service.CustomerService;
+import com.accelex.sample.exercise.service.interfaces.ICustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CustomerController {
 
-    private final CustomerService customerService;
+    private final ICustomerService customerService;
 
     @PostMapping
     public ResponseEntity<CustomerResponse> create(@RequestBody @Valid CustomerRequest costumer){

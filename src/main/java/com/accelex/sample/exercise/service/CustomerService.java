@@ -7,6 +7,7 @@ import com.accelex.sample.exercise.exception.ElementNotFoundException;
 import com.accelex.sample.exercise.mapper.CustomerMapper;
 import com.accelex.sample.exercise.model.Customer;
 import com.accelex.sample.exercise.repository.CustomerRepository;
+import com.accelex.sample.exercise.service.interfaces.ICustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerService {
+public class CustomerService implements ICustomerService {
     private final CustomerRepository customerRepository;
 
     public CustomerResponse create(CustomerRequest customerRequest){

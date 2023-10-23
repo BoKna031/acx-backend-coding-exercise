@@ -15,6 +15,7 @@ import com.accelex.sample.exercise.model.enums.RentalStatus;
 import com.accelex.sample.exercise.repository.CustomerRepository;
 import com.accelex.sample.exercise.repository.RentalRepository;
 import com.accelex.sample.exercise.repository.VehicleRepository;
+import com.accelex.sample.exercise.service.interfaces.IRentalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RentalService {
+public class RentalService implements IRentalService {
 
     private final RentalRepository rentalRepository;
 
@@ -33,7 +34,7 @@ public class RentalService {
 
     private final VehicleRepository vehicleRepository;
 
-    public RentalResponse rentVehicle(RentalRequest request) throws RentalNotPossibleException {
+    public RentalResponse rentVehicle(RentalRequest request){
         Rental rental = prepareRental(request);
 
         if(!isVehicleDriveable(request.getVehicleId()))

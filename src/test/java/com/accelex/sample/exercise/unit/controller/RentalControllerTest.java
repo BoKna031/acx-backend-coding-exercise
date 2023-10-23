@@ -10,6 +10,7 @@ import com.accelex.sample.exercise.exception.ElementNotFoundException;
 import com.accelex.sample.exercise.exception.RentalNotPossibleException;
 import com.accelex.sample.exercise.model.enums.RentalStatus;
 import com.accelex.sample.exercise.service.RentalService;
+import com.accelex.sample.exercise.service.interfaces.IRentalService;
 import jakarta.persistence.EntityNotFoundException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +40,7 @@ public class RentalControllerTest {
     private RentalController rentalController;
 
     @Mock
-    private RentalService rentalServiceMock;
+    private IRentalService rentalServiceMock;
 
     @BeforeEach
     public void SetUp(){

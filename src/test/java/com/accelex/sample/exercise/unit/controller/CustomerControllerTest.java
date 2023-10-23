@@ -6,6 +6,7 @@ import com.accelex.sample.exercise.dto.customer.CustomerResponse;
 import com.accelex.sample.exercise.exception.EntityConflictException;
 import com.accelex.sample.exercise.exception.ElementNotFoundException;
 import com.accelex.sample.exercise.service.CustomerService;
+import com.accelex.sample.exercise.service.interfaces.ICustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,7 +32,7 @@ class CustomerControllerTest {
     @InjectMocks
     private CustomerController customerController;
     @Mock
-    private CustomerService customerServiceMock;
+    private ICustomerService customerServiceMock;
 
     @BeforeEach
     public void SetUp(){
