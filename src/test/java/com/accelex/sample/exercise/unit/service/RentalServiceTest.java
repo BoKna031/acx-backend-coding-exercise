@@ -65,14 +65,14 @@ public class RentalServiceTest {
         BDDMockito.when(vehicleRepositoryMock.findById(-1L))
                 .thenReturn(Optional.empty());
 
-        BDDMockito.when(rentalRepositoryMock.existVehicleWithStatus(vehicleWithId, RentalStatus.RETURNED_DAMAGED))
+        BDDMockito.when(rentalRepositoryMock.existVehicleWithStatus(vehicleWithId.getId(), RentalStatus.RETURNED_DAMAGED))
                 .thenReturn(0);
 
 
-        BDDMockito.when(rentalRepositoryMock.findRentalsForVehicleAndTimestamp(vehicleWithId, AVAILABLE_RENTAL_DATE_TIME))
+        BDDMockito.when(rentalRepositoryMock.findRentalsForVehicleAndTimestamp(vehicleWithId.getId(), AVAILABLE_RENTAL_DATE_TIME))
                 .thenReturn(Collections.emptyList());
 
-        BDDMockito.when(rentalRepositoryMock.findRentalsForVehicleAndTimestamp(vehicleWithId, NOT_AVAILABLE_RENTAL_DATE_TIME))
+        BDDMockito.when(rentalRepositoryMock.findRentalsForVehicleAndTimestamp(vehicleWithId.getId(), NOT_AVAILABLE_RENTAL_DATE_TIME))
                 .thenReturn(List.of(existingRental(RentalStatus.OUT, null)));
     }
 

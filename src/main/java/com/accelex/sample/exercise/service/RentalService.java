@@ -36,10 +36,10 @@ public class RentalService {
     public RentalResponse rentVehicle(RentalRequest request) throws RentalNotPossibleException {
         Rental rental = prepareRental(request);
 
-        if(!isVehicleDriveable(rental.getVehicle()))
+        if(!isVehicleDriveable(request.getVehicleId()))
             throw new RentalNotPossibleException("Vehicle is broken!");
 
-        if(!isVehicleAvailableAtTimestamp(rental.getVehicle(), rental.getStartDate()))
+        if(!isVehicleAvailableAtTimestamp(request.getVehicleId(), rental.getStartDate()))
             throw new RentalNotPossibleException("Vehicle is not available!");
 
         Rental savedRental = rentalRepository.save(rental);
@@ -47,17 +47,21 @@ public class RentalService {
     }
 
     public RentalResponse returnVehicle(ReturnVehicleRequest request){
-        Customer customer = getCustomerOrThrowNotFoundException(request.getCustomerId());
-        Vehicle vehicle = getVehicleOrThrowNotFoundException(request.getVehicleId());
+        getCustomerOrThrowNotFoundException(request.getCustomerId());
+        getVehicleOrThrowNotFoundException(request.getVehicleId());
 
-        Rental rental = findRentedVehicleOrThrowNotFoundException(customer, vehicle);
+        Rental rental = findRentedVehicleOrThrowNotFoundException(request.getCustomerId(), request.getVehicleId());
 
         rental.setReturnDate(LocalDateTime.now());
-        RentalStatus status = request.isVehicleReturnedDamaged()? RentalStatus.RETURNED_DAMAGED : RentalStatus.RETURNED_OK;
+        RentalStatus status = getProperReturnedStatus(request.isVehicleReturnedDamaged());
         rental.setStatus(status);
 
         Rental savedRental = rentalRepository.save(rental);
         return RentalMapper.mapToRentalResponse(savedRental);
+    }
+
+    private RentalStatus getProperReturnedStatus(boolean isVehicleReturnedDamaged){
+        return isVehicleReturnedDamaged? RentalStatus.RETURNED_DAMAGED : RentalStatus.RETURNED_OK;
     }
 
     public Page<VehicleResponse> getAllRented(Pageable pageable){
@@ -74,8 +78,8 @@ public class RentalService {
         return new Rental(customer, vehicle,startDateTime, null, status);
     }
 
-    private Rental findRentedVehicleOrThrowNotFoundException(Customer customer, Vehicle vehicle){
-        return  rentalRepository.findRentedVehicleForCustomer(customer, vehicle, RentalStatus.OUT)
+    private Rental findRentedVehicleOrThrowNotFoundException(Long customerId, Long vehicleId){
+        return  rentalRepository.findRentedVehicleForCustomer(customerId, vehicleId, RentalStatus.OUT)
                 .orElseThrow(() -> new ElementNotFoundException("Rental doesn't exist or vehicle is already returned"));
     }
 
@@ -89,13 +93,13 @@ public class RentalService {
                 .orElseThrow(() -> new ElementNotFoundException("Customer", customerId.toString()));
     }
 
-    private boolean isVehicleAvailableAtTimestamp(Vehicle vehicle, LocalDateTime timestamp){
-        List<Rental> rentals = rentalRepository.findRentalsForVehicleAndTimestamp(vehicle, timestamp);
+    private boolean isVehicleAvailableAtTimestamp(Long vehicleId, LocalDateTime timestamp){
+        List<Rental> rentals = rentalRepository.findRentalsForVehicleAndTimestamp(vehicleId, timestamp);
         return rentals.isEmpty();
     }
 
-    private boolean isVehicleDriveable(Vehicle vehicle){
-        return !(rentalRepository.existVehicleWithStatus(vehicle, RentalStatus.RETURNED_DAMAGED) > 0) ;
+    private boolean isVehicleDriveable(Long vehicleId){
+        return !(rentalRepository.existVehicleWithStatus(vehicleId, RentalStatus.RETURNED_DAMAGED) > 0) ;
     }
 
 }

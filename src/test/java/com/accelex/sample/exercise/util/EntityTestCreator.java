@@ -18,111 +18,90 @@ import java.time.LocalDateTime;
 public class EntityTestCreator {
 
     // ---------------CUSTOMER--------------------
+
+    private static final String CUSTOMER_FIRST_NAME = "Mark";
+    private static final String CUSTOMER_LAST_NAME = "Eric";
+    private static final LocalDate BIRTH_DATE = LocalDate.of(1994,5,14);
+    private static final String DRIVING_LICENSE_NUMBER = "TEST02";
+
+    private static final Long CUSTOMER_ID = 1L;
+
     public static Customer nonexistingCustomer(){
-        return new Customer(
-                "Mark",
-                "Eric",
-                LocalDate.of(1994,5,14),
-                "TEST02");
+        return new Customer( CUSTOMER_FIRST_NAME, CUSTOMER_LAST_NAME, BIRTH_DATE, DRIVING_LICENSE_NUMBER);
     }
 
     public static Customer customerWithId(){
         Customer customer = nonexistingCustomer();
-        customer.setId(1L);
+        customer.setId(CUSTOMER_ID);
         return customer;
     }
 
     public static CustomerRequest customerRequest(){
-        return new CustomerRequest(
-                "Mark",
-                "Eric",
-                LocalDate.of(1994,5,14),
-                "TEST02");
+        return new CustomerRequest( CUSTOMER_FIRST_NAME, CUSTOMER_LAST_NAME, BIRTH_DATE, DRIVING_LICENSE_NUMBER);
     }
 
     public static CustomerResponse customerResponse(){
-        return new CustomerResponse(
-                     1L,
-                "Mark",
-                "Eric",
-                LocalDate.of(1994,5,14),
-                "TEST02");
+        return new CustomerResponse(CUSTOMER_ID, CUSTOMER_FIRST_NAME, CUSTOMER_LAST_NAME, BIRTH_DATE, DRIVING_LICENSE_NUMBER);
     }
 
     //----------------VEHICLE------------------------
 
+    private static final Long VEHICLE_ID = 1L;
+    private static final String VEHICLE_BRAND = "Toyota";
+    private static final String VEHICLE_MODEL = "Camry";
+    private static final Integer VEHICLE_MANUFACTURED_YEAR = 2022;
+    private static final String VEHICLE_COLOUR = "Silver";
+    private static final String VEHICLE_REGISTRATION = "ABC123";
     public static Vehicle nonexistingVehicle(){
-        return new Vehicle(
-                "Toyota",
-                "Camry",
-                  2022,
-                "Silver",
-            "ABC123"
-                );
+        return new Vehicle(VEHICLE_BRAND, VEHICLE_MODEL, VEHICLE_MANUFACTURED_YEAR, VEHICLE_COLOUR, VEHICLE_REGISTRATION);
     }
     public static Vehicle vehicleWithId(){
         Vehicle vehicle = nonexistingVehicle();
-        vehicle.setId(1L);
+        vehicle.setId(VEHICLE_ID);
         return vehicle;
     }
 
     public static VehicleRequest vehicleRequest(){
-        return new VehicleRequest(
-                "Toyota",
-                "Camry",
-                2022,
-                "Silver",
-                "ABC123"
-        );
+        return new VehicleRequest(VEHICLE_BRAND, VEHICLE_MODEL, VEHICLE_MANUFACTURED_YEAR, VEHICLE_COLOUR, VEHICLE_REGISTRATION);
     }
 
     public static VehicleResponse vehicleResponse(){
-        return new VehicleResponse(
-                1L,
-                "Toyota",
-                "Camry",
-                2022,
-                "Silver",
-                "ABC123"
-        );
+        return new VehicleResponse(VEHICLE_ID, VEHICLE_BRAND, VEHICLE_MODEL, VEHICLE_MANUFACTURED_YEAR, VEHICLE_COLOUR, VEHICLE_REGISTRATION);
     }
 
 
     //-----------------RENTAL---------------------
+    private static final Long RENTAL_ID = 2L;
     public static Rental nonexistingRental(RentalStatus status, LocalDateTime returnDateTime){
         return new Rental(
                 customerWithId(),
                 vehicleWithId(),
-                LocalDateTime.of(2023,10,15,13,20),
+                Constants.DUMMY_LOCAL_DATE_TIME_BEFORE,
                 returnDateTime,
                 status
         );
     }
     public static Rental existingRental(RentalStatus status, LocalDateTime returnDateTime){
         Rental rental = nonexistingRental(status, returnDateTime);
-        rental.setId(2l);
+        rental.setId(RENTAL_ID);
         return rental;
     }
 
     public static RentalRequest rentalRequest(){
-        return new RentalRequest(
-                1L,
-                1L,
-                null
-        );
+        return new RentalRequest(CUSTOMER_ID, VEHICLE_ID, null);
     }
     public static RentalResponse rentalResponse(RentalStatus status, LocalDateTime returnDate){
         return new RentalResponse(
-                2L,
+                RENTAL_ID,
                 customerResponse(),
                 vehicleResponse(),
-                LocalDateTime.of(2023,10,15,13,20),
+                Constants.DUMMY_LOCAL_DATE_TIME_BEFORE,
                 returnDate,
                 status.name()
         );
     }
 
     public static ReturnVehicleRequest returnVehicleRequest(boolean isVehicleDamaged){
-        return new ReturnVehicleRequest(1L,1L,isVehicleDamaged);
+        return new ReturnVehicleRequest(CUSTOMER_ID,VEHICLE_ID, isVehicleDamaged);
     }
 }

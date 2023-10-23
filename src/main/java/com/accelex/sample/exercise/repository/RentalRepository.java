@@ -17,20 +17,20 @@ import java.util.Optional;
 public interface RentalRepository extends JpaRepository<Rental, Long> {
 
     @Query("SELECT r FROM Rental r " +
-            "WHERE r.vehicle = :vehicle " +
+            "WHERE r.vehicle.id = :vehicleId " +
             "AND (r.returnDate IS NULL OR (:timestamp BETWEEN r.startDate AND r.returnDate))")
     List<Rental> findRentalsForVehicleAndTimestamp(
-            @Param("vehicle") Vehicle vehicle,
+            @Param("vehicleId") Long vehicleId,
             @Param("timestamp") LocalDateTime timestamp);
 
-    @Query("SELECT COUNT(r) FROM Rental r WHERE r.vehicle = :vehicle AND r.status = :status")
+    @Query("SELECT COUNT(r) FROM Rental r WHERE r.vehicle.id = :vehicleId AND r.status = :status")
     int existVehicleWithStatus(
-            @Param("vehicle") Vehicle vehicle, @Param("status") RentalStatus status);
+            @Param("vehicleId") Long vehicleId, @Param("status") RentalStatus status);
 
-    @Query("SELECT r FROM Rental r WHERE r.vehicle = :vehicle AND r.customer = :customer AND r.returnDate IS NULL AND r.status = :status")
+    @Query("SELECT r FROM Rental r WHERE r.vehicle.id = :vehicleId AND r.customer.id = :customerId AND r.returnDate IS NULL AND r.status = :status")
     Optional<Rental> findRentedVehicleForCustomer(
-            @Param("customer") Customer customer,
-            @Param("vehicle") Vehicle vehicle,
+            @Param("customerId") Long customerId,
+            @Param("vehicleId") Long vehicleId,
             @Param("status") RentalStatus status
     );
 
