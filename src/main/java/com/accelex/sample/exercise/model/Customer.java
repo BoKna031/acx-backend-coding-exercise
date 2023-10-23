@@ -3,6 +3,7 @@ package com.accelex.sample.exercise.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,24 +17,13 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Customer extends BaseEntity{
     @NotNull @NotEmpty
     private String firstName;
     @NotNull @NotEmpty
     private String lastName;
-    @NotNull
+    @NotNull @Past
     private LocalDate birthDate;
-    @NotNull @NotEmpty
+    @Column(unique = true, nullable = false) @NotEmpty
     private String driverLicenseNumber;
-
-    public Customer(@NotNull String firstName, @NotNull String lastName, @NotNull LocalDate birthDate, @NotNull String driverLicenseNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.driverLicenseNumber = driverLicenseNumber;
-    }
 }

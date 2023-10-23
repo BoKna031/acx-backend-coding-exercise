@@ -1,6 +1,6 @@
 package com.accelex.sample.exercise.exception;
 
-public class ElementNotFoundException extends RentalNotPossibleException {
+public class ElementNotFoundException extends RuntimeException {
 
     public ElementNotFoundException(String message) {
         super(message);

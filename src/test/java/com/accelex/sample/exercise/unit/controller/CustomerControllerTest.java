@@ -3,10 +3,9 @@ package com.accelex.sample.exercise.unit.controller;
 import com.accelex.sample.exercise.controller.CustomerController;
 import com.accelex.sample.exercise.dto.customer.CustomerRequest;
 import com.accelex.sample.exercise.dto.customer.CustomerResponse;
-import com.accelex.sample.exercise.exception.CustomerConflictException;
+import com.accelex.sample.exercise.exception.EntityConflictException;
 import com.accelex.sample.exercise.exception.ElementNotFoundException;
 import com.accelex.sample.exercise.service.CustomerService;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -87,9 +86,9 @@ class CustomerControllerTest {
        request.setDriverLicenseNumber("111111");
 
        BDDMockito.when(customerServiceMock.create(request))
-               .thenThrow(CustomerConflictException.class);
+               .thenThrow(EntityConflictException.class);
 
-       assertThrows(CustomerConflictException.class, () ->{
+       assertThrows(EntityConflictException.class, () ->{
            customerController.create(request);
        });
    }

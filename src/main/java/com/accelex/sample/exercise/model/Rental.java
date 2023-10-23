@@ -1,7 +1,7 @@
 package com.accelex.sample.exercise.model;
 
 import com.accelex.sample.exercise.model.enums.RentalStatus;
-import com.accelex.sample.exercise.service.CustomerService;
+import com.accelex.sample.exercise.validator.StartDateBeforeReturnDate;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -9,20 +9,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "rental")
 @NoArgsConstructor
 @AllArgsConstructor
+@StartDateBeforeReturnDate
 @Getter
 @Setter
-public class Rental {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Rental extends BaseEntity {
 
     @ManyToOne
     private Customer customer;
@@ -40,12 +36,4 @@ public class Rental {
     @NotNull
     @Enumerated(EnumType.ORDINAL)
     private RentalStatus status;
-
-    public Rental(Customer customer, Vehicle vehicle, @NotNull LocalDateTime startDate, LocalDateTime returnDate, @NotNull RentalStatus status) {
-        this.customer = customer;
-        this.vehicle = vehicle;
-        this.startDate = startDate;
-        this.returnDate = returnDate;
-        this.status = status;
-    }
 }

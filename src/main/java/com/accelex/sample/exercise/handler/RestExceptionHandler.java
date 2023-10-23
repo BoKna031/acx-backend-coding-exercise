@@ -1,7 +1,7 @@
 package com.accelex.sample.exercise.handler;
 
 import com.accelex.sample.exercise.exception.ErrorDetail;
-import com.accelex.sample.exercise.exception.CustomerConflictException;
+import com.accelex.sample.exercise.exception.EntityConflictException;
 import com.accelex.sample.exercise.exception.ElementNotFoundException;
 import com.accelex.sample.exercise.exception.RentalNotPossibleException;
 import org.springframework.http.HttpStatus;
@@ -31,8 +31,8 @@ public class RestExceptionHandler {
                 .build(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(CustomerConflictException.class)
-    public ResponseEntity<ErrorDetail> handleCustomerConflictException(CustomerConflictException cce){
+    @ExceptionHandler(EntityConflictException.class)
+    public ResponseEntity<ErrorDetail> handleEntityConflictException(EntityConflictException cce){
         return new ResponseEntity<>(
                 ErrorDetail.builder()
                         .title("Customer can't be created")

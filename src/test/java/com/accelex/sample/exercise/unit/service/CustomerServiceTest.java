@@ -2,7 +2,7 @@ package com.accelex.sample.exercise.unit.service;
 
 import com.accelex.sample.exercise.dto.customer.CustomerRequest;
 import com.accelex.sample.exercise.dto.customer.CustomerResponse;
-import com.accelex.sample.exercise.exception.CustomerConflictException;
+import com.accelex.sample.exercise.exception.EntityConflictException;
 import com.accelex.sample.exercise.exception.ElementNotFoundException;
 import com.accelex.sample.exercise.model.Customer;
 import com.accelex.sample.exercise.repository.CustomerRepository;
@@ -80,7 +80,7 @@ public class CustomerServiceTest {
         String existingDrivingLicense = getAlreadyExistingDrivingLicense();
         request.setDriverLicenseNumber(existingDrivingLicense);
 
-        assertThrows(CustomerConflictException.class, () ->{
+        assertThrows(EntityConflictException.class, () ->{
             customerService.create(request);
         });
     }

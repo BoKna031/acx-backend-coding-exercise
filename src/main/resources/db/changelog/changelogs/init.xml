@@ -10,6 +10,7 @@
             <column name="id" type="long" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" unique="true" />
             </column>
+            <column name="created_at" type="datetime" defaultValue="current_timestamp()"/>
             <column name="first_name" type="VARCHAR(255)" >
                 <constraints nullable="false" />
             </column>
@@ -28,6 +29,7 @@
             <column name="id" type="long" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" unique="true" />
             </column>
+            <column name="created_at" type="datetime" defaultValue="current_timestamp()"/>
             <column name="brand" type="VARCHAR(255)" >
                 <constraints nullable="false" />
             </column>
@@ -38,13 +40,16 @@
                 <constraints nullable="false" />
             </column>
             <column name="colour" type="VARCHAR(255)" />
-            <column name="registration" type="VARCHAR(255)" />
+            <column name="registration" type="VARCHAR(50)" >
+                <constraints nullable="false" unique="true" />
+            </column>
         </createTable>
 
         <createTable tableName="rental">
             <column name="id" type="long" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" unique="true" />
             </column>
+            <column name="created_at" type="datetime" defaultValue="current_timestamp()"/>
             <column name="customer_id" type="long">
                 <constraints nullable="false"/>
             </column>
