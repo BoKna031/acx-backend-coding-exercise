@@ -10,9 +10,12 @@ import java.lang.annotation.Target;
 
 @Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = StartDateBeforeReturnDateValidator.class)
-public @interface StartDateBeforeReturnDate {
-    String message() default "Start date must be before return date";
+@Constraint(validatedBy = DateTimeCorrectOrderValidator.class)
+public @interface DateTimeCorrectOrder {
+    String message() default "Date order is not valid";
+
+    String startDate();
+    String endDate();
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

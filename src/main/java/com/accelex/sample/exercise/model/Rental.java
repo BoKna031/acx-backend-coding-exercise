@@ -1,7 +1,7 @@
 package com.accelex.sample.exercise.model;
 
 import com.accelex.sample.exercise.model.enums.RentalStatus;
-import com.accelex.sample.exercise.validator.StartDateBeforeReturnDate;
+import com.accelex.sample.exercise.validator.DateTimeCorrectOrder;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -15,9 +15,10 @@ import java.time.LocalDateTime;
 @Table(name = "rental")
 @NoArgsConstructor
 @AllArgsConstructor
-@StartDateBeforeReturnDate
 @Getter
 @Setter
+
+@DateTimeCorrectOrder(startDate = "startDate", endDate = "returnDate")
 public class Rental extends BaseEntity {
 
     @ManyToOne
