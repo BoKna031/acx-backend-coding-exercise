@@ -21,6 +21,7 @@ import java.util.List;
 
 import static com.accelex.sample.exercise.util.EntityTestCreator.customerRequest;
 import static com.accelex.sample.exercise.util.EntityTestCreator.customerResponse;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 
@@ -56,13 +57,13 @@ class CustomerControllerTest {
     }
 
     @Test
-    void getAllCustomersReturnsPageOfCustomers() {
+    void getAllReturnsPagesOfCustomerResponse() {
         String expectedFirstName = customerResponse().getFirstName();
 
         ResponseEntity<Page<CustomerResponse>> response = customerController.getAll(null);
         Page<CustomerResponse> customerPage = response.getBody();
         assertNotNull(customerPage);
-        Assertions.assertThat(customerPage.toList()).isNotEmpty();
+        assertThat(customerPage.toList()).isNotEmpty();
         assertEquals(expectedFirstName, customerPage.toList().get(0).getFirstName());
         assertEquals(1, customerPage.getTotalPages());
         assertEquals(HttpStatus.OK, response.getStatusCode());

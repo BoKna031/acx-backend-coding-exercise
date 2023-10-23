@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class VehicleResponse {
-    private long id;
+    private Long id;
     private String brand;
     private String model;
     private int year;

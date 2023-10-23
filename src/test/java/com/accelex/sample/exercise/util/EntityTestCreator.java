@@ -28,27 +28,25 @@ public class EntityTestCreator {
 
     public static Customer customerWithId(){
         Customer customer = nonexistingCustomer();
-        customer.setId(1l);
+        customer.setId(1L);
         return customer;
     }
 
     public static CustomerRequest customerRequest(){
         return new CustomerRequest(
-                "Tim",
-                "Armelle",
-                LocalDate.of(1992,4,15),
-                "TT22XX"
-        );
+                "Mark",
+                "Eric",
+                LocalDate.of(1994,5,14),
+                "TEST02");
     }
 
     public static CustomerResponse customerResponse(){
         return new CustomerResponse(
-                     1l,
-                "Tim",
-                "Armelle",
-                LocalDate.of(1992,4,15),
-                "TT22XX"
-        );
+                     1L,
+                "Mark",
+                "Eric",
+                LocalDate.of(1994,5,14),
+                "TEST02");
     }
 
     //----------------VEHICLE------------------------
@@ -64,7 +62,7 @@ public class EntityTestCreator {
     }
     public static Vehicle vehicleWithId(){
         Vehicle vehicle = nonexistingVehicle();
-        vehicle.setId(2l);
+        vehicle.setId(1L);
         return vehicle;
     }
 
@@ -80,7 +78,7 @@ public class EntityTestCreator {
 
     public static VehicleResponse vehicleResponse(){
         return new VehicleResponse(
-                1l,
+                1L,
                 "Toyota",
                 "Camry",
                 2022,
@@ -108,14 +106,14 @@ public class EntityTestCreator {
 
     public static RentalRequest rentalRequest(){
         return new RentalRequest(
-                1l,
-                2l,
+                1L,
+                1L,
                 null
         );
     }
     public static RentalResponse rentalResponse(RentalStatus status, LocalDateTime returnDate){
         return new RentalResponse(
-                2l,
+                2L,
                 customerResponse(),
                 vehicleResponse(),
                 LocalDateTime.of(2023,10,15,13,20),
@@ -125,6 +123,6 @@ public class EntityTestCreator {
     }
 
     public static ReturnVehicleRequest returnVehicleRequest(boolean isVehicleDamaged){
-        return new ReturnVehicleRequest(1l,1l,isVehicleDamaged);
+        return new ReturnVehicleRequest(1L,1L,isVehicleDamaged);
     }
 }
