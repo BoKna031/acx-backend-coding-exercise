@@ -1,6 +1,5 @@
 package com.accelex.sample.exercise.validator;
 
-import com.accelex.sample.exercise.model.Rental;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

@@ -8,14 +8,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target({ ElementType.TYPE })
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = DateTimeCorrectOrderValidator.class)
-public @interface DateTimeCorrectOrder {
-    String message() default "Date order is not valid";
+@Constraint(validatedBy = RentalStatusValidator.class)
+public @interface ValidRentalStatus {
 
-    String startDate();
-    String endDate();
-    Class<?>[] groups() default {};
+    String message() default "Rental status is not valid";
+    Class<?> [] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -19,20 +19,4 @@ public abstract class BaseEntity {
 
     @CreatedDate
     private Instant createdAt;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof BaseEntity)) {
-            return false;
-        }
-        return id != null && id.equals(((BaseEntity) o).getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

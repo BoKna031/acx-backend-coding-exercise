@@ -2,6 +2,7 @@ package com.accelex.sample.exercise.model;
 
 import com.accelex.sample.exercise.model.enums.RentalStatus;
 import com.accelex.sample.exercise.validator.DateTimeCorrectOrder;
+import com.accelex.sample.exercise.validator.ValidRentalStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 
+@ValidRentalStatus(message = "Combination between status and return date isn't possible")
 @DateTimeCorrectOrder(startDate = "startDate", endDate = "returnDate")
 public class Rental extends BaseEntity {
 
